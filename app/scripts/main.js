@@ -29,6 +29,7 @@ var app = Ember.Application.create({
 		//the absolute root of the router.  all application routing is
 		//handled within the root of this route.
 		root: Ember.Route.extend({
+
 			//define a single route in the application.
 			index: Ember.Route.extend({
 				//the actual URL
@@ -37,10 +38,15 @@ var app = Ember.Application.create({
 				enter: function(router){
 					console.log("entered root view");
 				},
+				//fired when the route (not the view!) is exited.
+				exit: function() {
+
+				},
 				//what to do when this route is initialized, typically setting up a controller (context)
 				//and passing that to the router.
-				connectOutlets: function(router, context){
+				connectOutlets: function(router){
 					console.log('root view rendered');
+					router.get('applicationController').connectOutlet('index');
 				},
 				//deserialize the passed URL into an object (params) and pass it to the view.
 				//what you do with that data (call an API, etc) should be called on the views controller.
@@ -53,15 +59,19 @@ var app = Ember.Application.create({
 					return {};
 				}
 			}),
+
+			//another route in the application
 			greet: Ember.Route.extend({
 				route: '/hello',
 				enter: function(router){
 					console.log('entered greet');
 				},
 				connectOutlets: function(router, context) {
+					router.get('applicationController').connectOutlet('greet');
 					console.log("connected to the greet route.");
 				}
 			}),
+			//define a few action helpers for us to navigate around the site.
 			sayHello: Ember.Route.transitionTo('greet'),
 			goHome: Ember.Route.transitionTo('index')
 		})
