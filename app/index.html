@@ -17,17 +17,14 @@
         <script id="application" type="text/x-handlebars">
             <section id="root">
                 <h1><a {{action goHome href=true}}>this is the application</a></h1>
-                <a {{action sayHello href=true}}>greet</a>
                 {{outlet}}
             </section>
         </script>
 
         <script type="text/x-handlebars" id="index">
-            <h1>Hello World</h1>
                 //use an action helper to connect an action with it's controller.
                 //for where this is invoked, see main.js:L65
                 <a {{action sayHello href=true}}>greet</a>
-                {{outlet}}
             </div>
         </script>
 
