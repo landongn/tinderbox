@@ -1,0 +1,31 @@
+/* line 3, ../../app/styles/main.scss */
+a {
+  color: #fff;
+  text-decoration: none;
+}
+/* line 6, ../../app/styles/main.scss */
+a:hover {
+  text-decoration: underline;
+}
+
+/* line 12, ../../app/styles/main.scss */
+body {
+  background: #222;
+  color: #eee;
+  font-family: "Helvetica Neue", Helvetica;
+}
+
+/* line 18, ../../app/styles/main.scss */
+h1 {
+  font-family: "Helvetica Neue", Helvetica;
+  font-size: 24px;
+}
+
+/* line 23, ../../app/styles/main.scss */
+#root {
+  width: 500px;
+  height: 350px;
+  margin: 0 auto;
+  text-shadow: 0 0 10px black;
+  padding: 30px;
+}

@@ -14,10 +14,15 @@
     </head>
     <body>
 
+        <form>
+            <input type="text" name="title">
+            <input type="text" name="body">
+            <input type="submit">
+        </form>
+
         <script id="application" type="text/x-handlebars">
             <section id="root">
-                <h1><a {{action goHome href=true}}>this is the application</a></h1>
-                <h2>View the console to see what's happening.</h2>
+                <h1><a {{action goHome href=true}}>Home</a></h1>
                 {{outlet}}
             </section>
         </script>
@@ -25,12 +30,44 @@
         <!-- //use an action helper to connect an action with it's controller.
                 //for where this is invoked, see main.js:L65 -->
         <script type="text/x-handlebars" id="index">
-                <a {{action sayHello href=true}}>greet</a>
+            <ul>
+                <li><a {{action sayHello href=true}}>greet</a></li>
+                <li><a {{action addPost href=true}}>Create a Post</a></li>
+                <li><a {{action getPost id=0 href=true}}>get single post</a></li>
+                <li><a {{action getAllPosts href=true}}>get all posts</a></li>
+            </ul>
+
+            {{outlet}}
         </script>
 
         <script type="text/x-handlebars" id="greet">
             <h1>And hello to you, too.</h1>
         </script>
+
+        <script type="text/x-handlebars" id="post">
+            <h1>{{title}}</h1>
+            <p>{{body}}</p>
+        </script>
+
+        <script type="text/x-handlebars" id="allposts">
+        <div id="posts">
+            {{#each post in controller}}
+                {{post.title}}
+                <p>{{post.body}}</p>
+                <hr />
+            {{/each}}
+            </div>
+        </script>
+
+        <script type="text/x-handlebars" id="createPost">
+            <div id="createPost">
+                    {{view Ember.TextField valueBinding="title"}}
+                    {{view Ember.TextField valueBinding="body"}}
+
+                <a {{action createNewPost}}>create new post</a>
+            </div>
+        </script>
+
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
@@ -44,12 +81,5 @@
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
     </body>
 </html>
